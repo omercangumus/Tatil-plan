@@ -2138,16 +2138,12 @@ ADIM 3: main.tf Oluştur
 │   vpc_security_group_ids = [        │
 │     aws_security_group.web.id       │
 │   ]                                 │
-│   tags = {                          │
-│     Name = "${var.project_name
-                    } - Web"│
-│   }                                 │
+│   tags = { Name = "Web-Server" }    │
 │ }                                   │
 │                                     │
 │ output "public_ip" {                │
 │   value = aws_instance.web.public_ip│
-│
-        }                                   │
+│ }                                   │
 └─────────────────────────────────────┘
 
 ADIM 4: Uygula ve Test Et
@@ -2177,16 +2173,16 @@ ADIM 6: TEMİZLİK(ÖNEMLİ!)
 □ Resource referansları(security_group.id)
 
 ✅ Başarı Kriteri: EC2 public IP output'ta göründü mü?`,
-        "resources": [
-            { "name": "EC2 Terraform", "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance" }
-        ]
+                        "resources": [
+                            { "name": "EC2 Terraform", "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance" }
+                        ]
                     },
-        {
-            "id": 11,
-                "date": "23-24 Şubat",
-                    "title": "Terraform İleri Konular",
+                    {
+                        "id": 11,
+                        "date": "23-24 Şubat",
+                        "title": "Terraform İleri Konular",
                         "desc": "Bölüm 8: Modüller ve İleri Konular.",
-                            "challenge": `═══════════════════════════════════════
+                        "challenge": `═══════════════════════════════════════
 📺 TEORİ - Udemy'den İzle (Bölüm 8)
 ═══════════════════════════════════════
 
@@ -2288,16 +2284,16 @@ terraform apply
 □ DRY prensibiyle kod tekrarını azaltma
 
 ✅ Başarı Kriteri: 2 EC2 tek modülden oluştu mu?`,
-                                "resources": [
-                                    { "name": "Terraform Modules", "url": "https://developer.hashicorp.com/terraform/language/modules" }
-                                ]
-        },
-        {
-            "id": 12,
-                "date": "25 Şubat",
-                    "title": "FİNAL PROJESİ 🎉",
+                        "resources": [
+                            { "name": "Terraform Modules", "url": "https://developer.hashicorp.com/terraform/language/modules" }
+                        ]
+                    },
+                    {
+                        "id": 12,
+                        "date": "25 Şubat",
+                        "title": "FİNAL PROJESİ 🎉",
                         "desc": "Terraform + Docker Entegrasyonu.",
-                            "challenge": `═══════════════════════════════════════
+                        "challenge": `═══════════════════════════════════════
 🏆 FİNAL PROJESİ: Full Stack DevOps!
 ═══════════════════════════════════════
 
@@ -2413,11 +2409,11 @@ Sonraki Adımlar:
 → AWS Sertifikasyonları
 
 ✅ Başarı Kriteri: terraform apply ile site açıldı mı?`,
-                                "resources": [
-                                    { "name": "User Data", "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html" },
-                                    { "name": "DevOps Roadmap", "url": "https://roadmap.sh/devops" }
-                                ]
-        }
+                        "resources": [
+                            { "name": "User Data", "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html" },
+                            { "name": "DevOps Roadmap", "url": "https://roadmap.sh/devops" }
+                        ]
+                    }
                 ]
             }
         ];
