@@ -1039,1356 +1039,586 @@
             "terraform.tfvars dosyasını .gitignore'a ekle - hassas verileri koruma altına al!"
         ];
 
-        // Course Data - Detaylı Görevler (Teori + Pratik)
-        const courseData = [
+        // Course Data - Sürelere Göre Dengelenmiş Görevler
+const courseData = [
+    {
+        "week": "1. Hafta: Docker Temelleri",
+        "tasks": [
             {
-                "week": "1. Hafta: Docker Dünyası",
-                "tasks": [
-                    {
-                        "id": 1,
-                        "date": "5-6 Şubat",
-                        "title": "Docker Giriş & Temeller",
-                        "desc": "Bölüm 1-3: Mimari, Kurulum, CLI komutları.",
-                        "challenge": `📺 TEORİ (Udemy Bölüm 1-3)
+                "id": 1,
+                "date": "5-6 Şubat",
+                "title": "Docker Giriş & Kurulum",
+                "desc": "Bölüm 1-2 (~2 saat)",
+                "challenge": `📺 TEORİ (Bölüm 1: Giriş - 1 saat)
 
 Docker Nedir?
-• Uygulamaları "container" denilen izole kutularda çalıştırır
+• Uygulamaları container denilen izole kutularda çalıştırır
 • Her container mini bir bilgisayar gibidir
 • VM'den farkı: OS paylaşır, çok daha hafif
 
 Temel Kavramlar:
-• IMAGE = Container şablonu (tarif)
-• CONTAINER = Çalışan image (yemek)
+• IMAGE = Container şablonu
+• CONTAINER = Çalışan image
 • REGISTRY = Image deposu (Docker Hub)
-• DAEMON = Arka plan motoru
+
+---
+
+🛠️ PRATİK (Bölüm 2: Kurulum - 43 dk)
+
+1. Docker Desktop indir ve kur
+2. Terminal aç ve kontrol et:
+   docker --version
+   docker info
+
+3. İlk container:
+   docker run hello-world
+
+✅ Başarı: docker --version çalıştı mı?`,
+                "resources": [
+                    { "name": "Docker Install", "url": "https://docs.docker.com/get-started/" }
+                ]
+            },
+            {
+                "id": 2,
+                "date": "7-8 Şubat",
+                "title": "Container 101",
+                "desc": "Bölüm 3 (~2.5 saat)",
+                "challenge": `📺 TEORİ (Bölüm 3: Container 101 - 2.5 saat)
+
+Container Yaşam Döngüsü:
+• docker run = oluştur + başlat
+• docker stop = durdur
+• docker start = tekrar başlat
+• docker rm = sil
+
+Port Mapping:
+• -p 8080:80 = Host:Container
+• Dışarıdan erişim için şart
+
+Volume:
+• -v /host/path:/container/path
+• Veri kalıcılığı için
 
 ---
 
 🛠️ PRATİK
 
-1. Docker kurulumunu kontrol et:
-   docker --version
-   docker info
-
-2. İlk container'ı çalıştır:
-   docker run hello-world
-
-3. Web sunucusu başlat:
+1. Nginx container başlat:
    docker run -d -p 80:80 --name web nginx
-   
-   -d = arka planda çalış
-   -p 80:80 = port mapping
-   --name web = isim ver
 
-4. http://localhost aç • "Welcome to nginx!" gör
+2. http://localhost aç
 
-5. Temel komutlar:
-   docker ps          • çalışanları listele
-   docker ps -a       • tümünü listele
-   docker stop web    • durdur
-   docker start web   • başlat
-   docker logs web    • loglar
-   docker rm web      • sil
+3. Container yönetimi:
+   docker ps
+   docker logs web
+   docker exec -it web bash
+   docker stop web
+   docker rm web
+
+✅ Başarı: Container içine bash ile girdin mi?`,
+                "resources": [
+                    { "name": "Docker CLI", "url": "https://docs.docker.com/engine/reference/commandline/cli/" }
+                ]
+            },
+            {
+                "id": 3,
+                "date": "8-9 Şubat ⭐",
+                "title": "Container 102 (Hafta Sonu)",
+                "desc": "Bölüm 4 (~2.5 saat)",
+                "challenge": `📺 TEORİ (Bölüm 4: Container 102 - 2.5 saat)
+
+Environment Variables:
+• -e KEY=VALUE
+• Konfigürasyon için
+
+Restart Policy:
+• --restart always
+• Container otomatik başlar
+
+Resource Limits:
+• --memory 512m
+• --cpus 0.5
+
+---
+
+🛠️ PRATİK
+
+1. Environment variable ile:
+   docker run -d -e MYSQL_ROOT_PASSWORD=secret mysql
+
+2. Restart policy:
+   docker run -d --restart always nginx
+
+3. Kaynak limiti:
+   docker run -d --memory 256m nginx
+
+4. Tüm container'ları temizle:
+   docker container prune
+
+✅ Başarı: MySQL container env ile çalıştı mı?`,
+                "resources": [
+                    { "name": "Container Options", "url": "https://docs.docker.com/engine/reference/run/" }
+                ]
+            },
+            {
+                "id": 4,
+                "date": "10-11 Şubat",
+                "title": "Image & Registry (Part 1)",
+                "desc": "Bölüm 5 ilk yarı (~2.5 saat)",
+                "challenge": `📺 TEORİ (Bölüm 5: Image - İlk Yarı)
+
+Dockerfile Temelleri:
+• FROM = base image
+• COPY = dosya kopyala
+• RUN = komut çalıştır
+• CMD = başlangıç komutu
+
+Image Katmanları:
+• Her komut bir katman
+• Katmanlar cache'lenir
+• Sıralama önemli!
 
 ---
 
-✅ Başarı: localhost'ta Nginx gördün mü?`,
-                        "resources": [
-                            { "name": "Docker Docs", "url": "https://docs.docker.com/get-started/" },
-                            { "name": "Docker Cheatsheet", "url": "https://dockerlabs.collabnix.com/docker/cheatsheet/" }
-                        ]
-                    },
-                    {
-                        "id": 2,
-                        "date": "7-8 Şubat",
-                        "title": "Dockerfile & Network",
-                        "desc": "Bölüm 4-5: Image oluşturma ve Ağ yapısı.",
-                        "challenge": `---
-� TEORİ - Udemy'den İzle (Bölüm 4-5)
----
+🛠️ PRATİK
 
-💡 Dockerfile Nedir?
-• Kendi image'ını oluşturmak için yazılan talimat dosyası
-• Her satır bir "layer" (katman) oluşturur
-• Layer'lar cache'lenir = hızlı build
+1. Klasör oluştur:
+   mkdir myapp && cd myapp
 
-💡 Temel Dockerfile Komutları:
-┌────────────┬────────────────────────────────────┐
-   FROM          Temel image seç (zorunlu, ilk satır)
-   COPY          Dosyaları image'a kopyala         
-   RUN           Komut çalıştır (apt install gibi) 
-   WORKDIR       Çalışma dizinini ayarla           
-   EXPOSE        Port bilgisi (dokümantasyon)      
-   CMD           Container başlayınca çalışacak    
-   ENTRYPOINT    Değişmez başlangıç komutu         
-└────────────┴────────────────────────────────────┘
+2. index.html oluştur:
+   <h1>Merhaba Docker!</h1>
 
-💡 Docker Network Tipleri:
-• bridge: Varsayılan, container'lar arası iletişim
-• host: Container doğrudan host ağını kullanır
-• none: Ağ yok, izole
-
----
-�️ PRATİK - Kendi Image'ını Yap!
----
-
-ADIM 1: Proje Klasörü Oluştur
-
-   mkdir docker-website               
-   cd docker-website                  
-
-
-ADIM 2: HTML Dosyası Oluştur (index.html)
-
-   <!DOCTYPE html>                    
-   <html>                             
-   <head>                             
-     <title>Benim Sitem</title>       
-   </head>                            
-   <body>                             
-     <h1>Merhaba Docker!</h1>         
-     <p>Bu sayfa Docker ile çalışıyor</p>
-   </body>                            
-   </html>                            
-
-
-ADIM 3: Dockerfile Oluştur (uzantısız!)
-
-   FROM nginx:alpine                  
+3. Dockerfile oluştur:
+   FROM nginx:alpine
    COPY index.html /usr/share/nginx/html/
 
-• nginx:alpine = küçük boyutlu nginx image'ı
-• /usr/share/nginx/html/ = nginx'in web klasörü
+4. Build et:
+   docker build -t mysite:v1 .
 
-ADIM 4: Image'ı Build Et
+5. Çalıştır:
+   docker run -d -p 8080:80 mysite:v1
 
-   docker build -t benim-sitem:v1 .   
+✅ Başarı: localhost:8080'de sayfanı gördün mü?`,
+                "resources": [
+                    { "name": "Dockerfile", "url": "https://docs.docker.com/engine/reference/builder/" }
+                ]
+            }
+        ]
+    },
+    {
+        "week": "2. Hafta: Docker İleri & Terraform Giriş",
+        "tasks": [
+            {
+                "id": 5,
+                "date": "12-13 Şubat",
+                "title": "Image & Registry (Part 2)",
+                "desc": "Bölüm 5 ikinci yarı (~2.5 saat)",
+                "challenge": `📺 TEORİ (Bölüm 5: Image - İkinci Yarı)
 
-• -t benim-sitem:v1 = image'a isim:tag ver
-• . = Dockerfile'ın bulunduğu dizin
+Multi-stage Build:
+• Küçük final image
+• Build ve runtime ayrı
 
-ADIM 5: Kendi Image'ını Çalıştır
+Docker Hub:
+• docker login
+• docker push
+• docker pull
 
-   docker run -d -p 8080:80 benim-sitem:v1
-
-• http://localhost:8080 adresinde kendi sayfanı gör!
-
-ADIM 6: Network Pratiği
-
-   docker network ls                  
-   docker network create benim-ag     
-   docker run -d --network benim-ag --name web1 nginx
-   docker run -d --network benim-ag --name web2 nginx
-   docker exec web1 ping web2         
-
-• Aynı network'teki container'lar isimle haberleşir!
-
----
-� ÖZET - Bugün Ne Öğrendim?
----
-□ Dockerfile yazma ve build etme
-□ FROM, COPY, RUN komutlarının ne yaptığını
-□ docker build -t komutu ile image oluşturma
-□ Docker network oluşturma ve kullanma
-
-✅ Başarı Kriteri: localhost:8080'de kendi HTML sayfanı gördün mü?`,
-                        "resources": [
-                            { "name": "Dockerfile Reference", "url": "https://docs.docker.com/engine/reference/builder/" }
-                        ]
-                    },
-                    {
-                        "id": 3,
-                        "date": "9-10 Şubat",
-                        "title": "Compose & Swarm",
-                        "desc": "Bölüm 6: Çoklu servis yönetimi.",
-                        "challenge": `---
-� TEORİ - Udemy'den İzle (Bölüm 6)
----
-
-💡 Docker Compose Nedir?
-• Birden fazla container'ı TEK DOSYA ile yönetme aracı
-• YAML formatında yazılır (docker-compose.yml)
-• "docker-compose up" = tüm servisleri başlat
-• "docker-compose down" = tüm servisleri durdur
-
-💡 Neden Compose Kullanırız?
-• Gerçek uygulamalar tek container'da çalışmaz
-• Örnek: Web App + Database + Cache + Queue
-• Her seferinde 4 ayrı "docker run" yazmak zor
-• Compose ile tek komutla hepsini yönetirsin
-
-💡 YAML Dosya Yapısı:
-
-   version: '3.8'     # Compose versiyonu
-   services:          # Servisler (container'lar)
-     web:             # Servis adı
-       image: nginx   # Kullanılacak image
-       ports:         # Port mapping
-     db:              # İkinci servis
-       image: mysql   
-   volumes:           # Kalıcı veri alanları
-   networks:          # Özel ağlar
-
+Tagging:
+• image:tag formatı
+• latest = varsayılan
 
 ---
-�️ PRATİK - WordPress Stack Kur!
----
 
-ADIM 1: Proje Klasörü
+🛠️ PRATİK
 
-   mkdir wordpress-stack              
-   cd wordpress-stack                 
+1. Docker Hub'a giriş:
+   docker login
 
+2. Image'ı tag'le:
+   docker tag mysite:v1 USERNAME/mysite:v1
 
-ADIM 2: docker-compose.yml Oluştur
+3. Push et:
+   docker push USERNAME/mysite:v1
 
-   version: '3.8'                     
-                                      
-   services:                          
-     db:                              
-       image: mysql:5.7               
-       environment:                   
-         MYSQL_ROOT_PASSWORD: root123 
-         MYSQL_DATABASE: wordpress    
-         MYSQL_USER: wpuser           
-         MYSQL_PASSWORD: wppass       
-       volumes:                       
-         - db_data:/var/lib/mysql     
-                                      
-     wordpress:                       
-       depends_on:                    
-         - db                         
-       image: wordpress:latest        
-       ports:                         
-         - "8080:80"                  
-       environment:                   
-         WORDPRESS_DB_HOST: db:3306   
-         WORDPRESS_DB_USER: wpuser    
-         WORDPRESS_DB_PASSWORD: wppass
-         WORDPRESS_DB_NAME: wordpress 
-                                      
-   volumes:                           
-     db_data:                         
+4. Image'ları listele:
+   docker images
 
+5. Temizlik:
+   docker image prune
 
-• depends_on: WordPress, DB'den sonra başlar
-• db:3306: Servis adıyla erişim (network magic!)
-• volumes: Veritabanı verileri silinmez
-
-ADIM 3: Çalıştır ve Test Et
-
-   docker-compose up -d               
-   docker-compose ps                  
-   docker-compose logs wordpress      
-
-• http://localhost:8080 adresine git
-• WordPress kurulum ekranını görmelisin!
-
-ADIM 4: Temizlik
-
-   docker-compose down                
-   docker-compose down -v  # Volume'ları da sil
-
-
----
-📝 ÖZET - Bugün Ne Öğrendim?
----
-□ Docker Compose ne işe yarar
-□ YAML dosya formatını
-□ services, volumes, networks kavramlarını
-□ docker-compose up/down/ps/logs komutlarını
-
-✅ Başarı Kriteri: WordPress kurulum ekranını gördün mü?`,
-                        "resources": [
-                            { "name": "Compose Docs", "url": "https://docs.docker.com/compose/" }
-                        ]
-                    },
-                    {
-                        "id": 4,
-                        "date": "11 Şubat",
-                        "title": "Docker Tekrar & Bölüm 7",
-                        "desc": "Bölüm 7 (Ek Bilgiler) + Genel tekrar.",
-                        "challenge": `---
-� TEORİ - Udemy'den İzle (Bölüm 7)
----
-
-💡 Bu Bölümde Neler Var?
-• Docker best practices
-• Multi-stage builds (küçük image'lar için)
-• Docker security önerileri
-• Production ipuçları
-
-💡 Multi-Stage Build Nedir?
-• Tek Dockerfile'da birden fazla FROM kullanmak
-• Build aşaması ve runtime aşaması ayrılır
-• Final image çok küçük olur (sadece gerekli dosyalar)
-
-💡 Docker Best Practices:
-• Her container TEK görev yapsın
-• .dockerignore kullan (node_modules gibi)
-• Root kullanıcısı yerine özel user oluştur
-• COPY vs ADD: Basit kopyalamada COPY kullan
-• Layer'ları azalt: RUN komutlarını birleştir
-
----
-🛠️ PRATİK - Haftalık Tekrar!
----
-
-� Mini Sınav - Komutları Ezbere Yaz:
-
-   Çalışan container'ları listele?    
-   • docker ps                        
-                                      
-   Tüm container'ları listele?        
-   • docker ps -a                     
-                                      
-   Container durdur?                  
-   • docker stop <container_id>       
-                                      
-   Container sil?                     
-   • docker rm <container_id>         
-                                      
-   Container içine gir?               
-   • docker exec -it <id> /bin/bash   
-                                      
-   Log'ları gör?                      
-   • docker logs <container_id>       
-                                      
-   Image'ları listele?                
-   • docker images                    
-
-
-� Temizlik Komutları:
-
-   docker system df        # Disk kullanımı
-   docker system prune -a  # Temizlik (DİKKAT!)
-   docker network ls       # Network'ler
-   docker volume ls        # Volume'lar
-
-
-� Bonus - Flask App Dockerize:
-1. app.py oluştur:
-
-   from flask import Flask            
-   app = Flask(__name__)              
-   @app.route('/')                    
-   def hello():                       
-       return "Merhaba Flask!"        
-   if __name__ == '__main__':         
-       app.run(host='0.0.0.0',port=5000)│
-
-
-2. Dockerfile:
-
-   FROM python:3.9-slim               
-   WORKDIR /app                       
-   RUN pip install flask              
-   COPY app.py .                      
-   EXPOSE 5000                        
-   CMD ["python", "app.py"]           
-
-
-3. Build ve çalıştır:
-
-   docker build -t flask-app .        
-   docker run -d -p 5000:5000 flask-app│
-
-• http://localhost:5000 kontrol et!
-
----
-📝 ÖZET - Docker Haftası Tamamlandı!
----
-□ Container vs VM farkını biliyorum
-□ docker run/ps/stop/rm komutlarını biliyorum
-□ Dockerfile yazabiliyorum
-□ docker-compose ile multi-container yönetebiliyorum
-□ Network ve Volume kavramlarını anladım
-
-✅ Başarı Kriteri: Flask app localhost:5000'de çalışıyor mu?`,
-                        "resources": [
-                            { "name": "Docker Best Practices", "url": "https://docs.docker.com/develop/develop-images/dockerfile_best-practices/" }
-                        ]
-                    }
+✅ Başarı: Docker Hub'da image'ını gördün mü?`,
+                "resources": [
+                    { "name": "Docker Hub", "url": "https://hub.docker.com/" }
                 ]
             },
             {
-                "week": "2. Hafta: Terraform & AWS Temelleri",
-                "tasks": [
-                    {
-                        "id": 5,
-                        "date": "12-13 Şubat",
-                        "title": "Terraform & AWS Kurulum",
-                        "desc": "Bölüm 1-4: Giriş, Kurulum ve Hazırlık.",
-                        "challenge": `---
-� TEORİ - Udemy'den İzle (Bölüm 1-4)
----
+                "id": 6,
+                "date": "14 Şubat",
+                "title": "Docker Compose",
+                "desc": "Bölüm 6 ilk yarı (~2 saat)",
+                "challenge": `📺 TEORİ (Bölüm 6: Compose - 2 saat)
 
-💡 Terraform Nedir?
-• HashiCorp'un Infrastructure as Code (IaC) aracı
-• Altyapıyı KOD olarak tanımlarsın
-• terraform apply = altyapı otomatik oluşur
-• terraform destroy = altyapı silinir
+Docker Compose Nedir?
+• Çoklu container yönetimi
+• YAML dosyası ile tanım
+• Tek komutla hepsini başlat
 
-💡 Neden Terraform?
-• Manuel işlem = hata riski, unutulan adımlar
-• Terraform = tekrarlanabilir, versiyon kontrollü
-• Aynı kodu farklı ortamlarda (dev/prod) kullanabilirsin
-• Değişiklikleri plan aşamasında görürsün
-
-💡 Temel Kavramlar:
-
-   Provider  = Hangi bulut? (AWS, Azure)
-   Resource  = Ne oluşturuyoruz? (EC2, S3)
-   State     = Mevcut durum kaydı
-   Plan      = Ne değişecek önizlemesi
-   Apply     = Değişiklikleri uygula
-   Destroy   = Her şeyi sil
-
-
-💡 HCL (HashiCorp Configuration Language):
-• Terraform'un kendi dili
-• .tf uzantılı dosyalar
-• JSON benzeri ama daha okunabilir
+compose.yml Yapısı:
+• services: container'lar
+• volumes: kalıcı veri
+• networks: ağ tanımı
 
 ---
-�️ PRATİK - Kurulumları Yap!
----
 
-ADIM 1: Terraform Kurulumu
+🛠️ PRATİK
 
-   # Windows (PowerShell - Admin)     
-   winget install HashiCorp.Terraform 
-                                      
-   # Veya manuel:                     
-   # terraform.io/downloads           
-   # İndir • Zip aç • PATH'e ekle     
+1. compose.yml oluştur:
 
+services:
+  web:
+    image: nginx
+    ports:
+      - "80:80"
+  db:
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
 
-Kontrol:
+2. Başlat:
+   docker compose up -d
 
-   terraform --version                
+3. Kontrol:
+   docker compose ps
+   docker compose logs
 
-• "Terraform v1.x.x" görmeli
+4. Durdur:
+   docker compose down
 
-ADIM 2: AWS CLI Kurulumu
-
-   # Windows                          
-   winget install Amazon.AWSCLI       
-                                      
-   # Veya: aws.amazon.com/cli         
-
-
-Kontrol:
-
-   aws --version                      
-
-
-ADIM 3: AWS Hesabı Oluştur (Free Tier)
-• aws.amazon.com > Create Account
-• Kredi kartı gerekli (free tier aşılmazsa ücret yok)
-• 12 ay boyunca çoğu servis ücretsiz
-
-ADIM 4: IAM User Oluştur
-AWS Console > IAM > Users > Add User
-
-   User name: terraform-user          
-   Access type: Programmatic access ✓ 
-   Permissions: AdministratorAccess   
-                                      
-   • Access Key ID'yi kaydet!         
-   • Secret Access Key'i kaydet!      
-   (Bu şifreler bir daha gösterilmez!)
-
-
-ADIM 5: AWS CLI Konfigürasyonu
-
-   aws configure                      
-
-• Access Key ID: (yapıştır)
-• Secret Access Key: (yapıştır)
-• Default region: eu-west-1
-• Default output format: json
-
-ADIM 6: Test Et
-
-   aws sts get-caller-identity        
-
-• Hesap ID ve kullanıcı adını görmeli
-
----
-📝 ÖZET - Bugün Ne Öğrendim?
----
-□ Terraform nedir ve neden kullanılır
-□ IaC (Infrastructure as Code) kavramı
-□ Terraform ve AWS CLI kurulumu
-□ AWS IAM user oluşturma
-□ aws configure ile credential ayarlama
-
-✅ Başarı Kriteri: aws sts get-caller-identity çalışıyor mu?`,
-                        "resources": [
-                            { "name": "Terraform Install", "url": "https://developer.hashicorp.com/terraform/downloads" },
-                            { "name": "AWS CLI", "url": "https://aws.amazon.com/cli/" }
-                        ]
-                    },
-                    {
-                        "id": 6,
-                        "date": "14-15 Şubat",
-                        "title": "Terraform Temelleri",
-                        "desc": "Bölüm 5: State mantığı ve temel komutlar.",
-                        "challenge": `---
-� TEORİ - Udemy'den İzle (Bölüm 5)
----
-
-💡 Terraform Workflow:
-
-   1. WRITE    • .tf dosyaları yaz    
-   2. INIT     • Provider'ları indir  
-   3. PLAN     • Değişiklikleri önizle
-   4. APPLY    • Uygula               
-   5. DESTROY  • Her şeyi sil         
-
-
-💡 State Dosyası Nedir?
-• terraform.tfstate = Terraform'un "hafızası"
-• Oluşturulan kaynakların kaydını tutar
-• Plan yaparken: state vs kod karşılaştırılır
-• ASLA ELLE DÜZENLENMEMELİ!
-
-💡 Terraform Blok Yapısı:
-
-   terraform { }   # Terraform ayarları
-   provider { }    # Bulut sağlayıcı   
-   resource { }    # Oluşturulacak kaynak
-   data { }        # Var olan kaynağı oku
-   variable { }    # Değişken tanımla  
-   output { }      # Çıktı göster      
-
-
-� Resource Sözdizimi:
-resource "TİP" "İSİM" {
-  özellik = "değer"
-}
-• TİP: aws_instance, aws_s3_bucket vb.
-• İSİM: Kodda referans için kullanılır
-
----
-🛠️ PRATİK - İlk Terraform Kodunu Yaz!
----
-
-ADIM 1: Proje Klasörü
-
-   mkdir terraform-lab                
-   cd terraform-lab                   
-
-
-ADIM 2: main.tf Oluştur (AWS olmadan test!)
-
-   terraform {                        
-     required_providers {             
-       local = {                      
-         source = "hashicorp/local"   
-       }                              
-     }                                
-   }                                  
-                                      
-   resource "local_file" "merhaba" {  
-     content  = "Merhaba Terraform!"  
-     filename = "output/merhaba.txt"  
-   }                                  
-                                      
-   output "dosya_yolu" {              
-     value = local_file.merhaba.filename│
-   }                                  
-
-• local provider = AWS'e gerek kalmadan test
-
-ADIM 3: Terraform Init
-
-   terraform init                     
-
-• Provider'ları indirir (.terraform klasörü oluşur)
-• "Terraform has been successfully initialized" görmeli
-
-ADIM 4: Terraform Plan
-
-   terraform plan                     
-
-• Ne yapılacağını gösterir:
-  + = eklenecek (yeşil)
-  - = silinecek (kırmızı)
-  ~ = değişecek (sarı)
-
-ADIM 5: Terraform Apply
-
-   terraform apply                    
-   # "yes" yaz ve Enter               
-
-• output/merhaba.txt dosyası oluşur!
-• terraform.tfstate dosyası oluşur
-
-ADIM 6: State'i İncele
-
-   terraform show                     
-   terraform state list               
-
-
-ADIM 7: Temizlik
-
-   terraform destroy                  
-   # "yes" yaz                        
-
-• Oluşturulan dosya silinir
-
----
-📝 ÖZET - Bugün Ne Öğrendim?
----
-□ terraform init/plan/apply/destroy akışını
-□ State dosyasının önemini
-□ resource ve output bloklarını
-□ Local provider ile test yapmayı
-
-✅ Başarı Kriteri: merhaba.txt oluştu ve silindi mi?`,
-                        "resources": [
-                            { "name": "Terraform Basics", "url": "https://developer.hashicorp.com/terraform/tutorials/aws-get-started" }
-                        ]
-                    },
-                    {
-                        "id": 7,
-                        "date": "16-17 Şubat",
-                        "title": "AWS Temelleri (Manuel)",
-                        "desc": "Bölüm 6: AWS Console ile temel servisler.",
-                        "challenge": `---
-� TEORİ - Udemy'den İzle (Bölüm 6)
----
-
-💡 AWS Temel Servisleri:
-
-   EC2      = Sanal sunucu             
-   S3       = Dosya/nesne depolama     
-   VPC      = Özel ağ                  
-   IAM      = Kullanıcı/yetki yönetimi 
-   RDS      = Yönetilen veritabanı     
-   Lambda   = Sunucusuz fonksiyon      
-
-
-💡 EC2 Nedir?
-• Elastic Compute Cloud = Sanal sunucu
-• AMI: Önceden yapılandırılmış sunucu image'ı
-• Instance Type: Sunucu gücü (t2.micro free tier!)
-• Security Group: Firewall kuralları
-• Key Pair: SSH erişimi için şifre
-
-💡 VPC Temel Kavramlar:
-• VPC = Virtual Private Cloud (Kendi ağın)
-• Subnet = Alt ağ (public veya private)
-• Internet Gateway = VPC'ye internet bağlantısı
-• Security Group = Hangi portlar açık?
-
-💡 Free Tier Uyarıları:
-⚠️ t2.micro = Aylık 750 saat ücretsiz
-⚠️ Terminate etmeyi unutma yoksa ücret kesilir!
-⚠️ EBS (disk) de ücretli olabilir
-
----
-�️ PRATİK - Manuel EC2 Oluştur!
----
-
-ADIM 1: AWS Console'a Gir
-• console.aws.amazon.com
-• EC2 servisini ara ve aç
-
-ADIM 2: Launch Instance
-
-   Name: manuel-test-server           
-   AMI: Amazon Linux 2023 (Free tier) 
-   Instance Type: t2.micro            
-   Key Pair: "Create new key pair"    
-     • Name: devops-key               
-     • Type: RSA                      
-     • Format: .pem (indir ve sakla!) 
-
-
-ADIM 3: Network Ayarları
-
-   VPC: Default VPC                   
-   Auto-assign public IP: Enable     
-   Security Group: Create new         
-     • SSH (22): My IP                
-     • HTTP (80): Anywhere            
-
-
-ADIM 4: Launch Et
-• "Launch instance" tıkla
-• Instances listesinde bekle (pending • running)
-
-ADIM 5: SSH ile Bağlan
-
-   # Key dosyasının olduğu klasöre git
-   cd Downloads                       
-                                      
-   # SSH bağlantısı                   
-   ssh -i "devops-key.pem" ec2-user@<PUBLIC-IP>
-                                      
-   # İlk bağlantıda "yes" yaz         
-
-• <PUBLIC-IP> = EC2 Details'den al
-
-ADIM 6: Sunucu İçinde Web Server Kur
-
-   sudo yum update -y                 
-   sudo yum install httpd -y          
-   sudo systemctl start httpd         
-   sudo systemctl enable httpd        
-   echo "<h1>Merhaba AWS!</h1>" | sudo tee /var/www/html/index.html
-
-
-ADIM 7: Tarayıcıda Test
-• http://<PUBLIC-IP> adresine git
-• "Merhaba AWS!" yazısını görmelisin!
-
-ADIM 8: TEMİZLİK (ÇOK ÖNEMLİ!)
-
-   EC2 > Instances > Select instance  
-   Instance state > Terminate         
-   ⚠️ Silmezsen para ödersin!         
-
-
----
-📝 ÖZET - Bugün Ne Öğrendim?
----
-□ AWS Console navigasyonunu
-□ EC2 launch workflow'unu
-□ Key Pair oluşturma ve SSH bağlantısı
-□ Security Group mantığını
-□ Terminate etmenin önemini (💰)
-
-✅ Başarı Kriteri: Kendi sunucuna bağlanıp web sayfası gördün mü?`,
-                        "resources": [
-                            { "name": "EC2 Guide", "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EC2_GetStarted.html" }
-                        ]
-                    },
-                    {
-                        "id": 8,
-                        "date": "18 Şubat",
-                        "title": "2.Hafta Tekrar & VPC",
-                        "desc": "Terraform + AWS Tekrar günü.",
-                        "challenge": `---
-� TEORİ - Bu Hafta Öğrendiklerini Tekrarla
----
-
-💡 Terraform Workflow Özeti:
-
-   terraform init    # Provider indir 
-   terraform plan    # Önizleme       
-   terraform apply   # Uygula         
-   terraform destroy # Temizle        
-
-
-💡 AWS Temel Servisleri:
-
-   EC2  = Sanal sunucu               
-   S3   = Dosya depolama             
-   VPC  = Özel ağ                    
-   IAM  = Kullanıcı yönetimi         
-
-
-💡 VPC Mimarisi:
-
-                      VPC                   
-               
-        PUBLIC                PRIVATE          
-        SUBNET                SUBNET           
-        (Web)                 (DB)             
-    └─────┬──────┘      └──────┬─────┘     
-                                             
-          ▼                    ▼           
-     Internet GW          NAT Gateway      
-
-
-💡 CIDR Bloğu Nedir?
-• IP adresi aralığını tanımlar
-• /16 = 65,536 IP (10.0.0.0/16)
-• /24 = 256 IP (10.0.1.0/24)
-• Büyük sayı = daha az IP
-
----
-🛠️ PRATİK - VPC Mimarisi Çiz!
----
-
-📝 Kağıda/Excalidraw'a Çiz:
-
-VPC: my-devops-vpc (10.0.0.0/16)
-├── Region: eu-west-1
-├── Public Subnet (10.0.1.0/24) - AZ: eu-west-1a
-     └── Web Server (EC2)
-├── Public Subnet (10.0.2.0/24) - AZ: eu-west-1b
-     └── Web Server (EC2)
-├── Private Subnet (10.0.101.0/24) - AZ: eu-west-1a
-     └── Database (RDS)
-├── Private Subnet (10.0.102.0/24) - AZ: eu-west-1b
-     └── Database (RDS)
-├── Internet Gateway
-├── NAT Gateway (public subnet'te)
-├── Route Table - Public
-     └── 0.0.0.0/0 • Internet Gateway
-└── Route Table - Private
-    └── 0.0.0.0/0 • NAT Gateway
-
-� Mini Sınav - Ezbere Yaz:
-
-   1. Terraform init ne yapar?        
-   2. terraform.tfstate nedir?        
-   3. Security Group ne işe yarar?    
-   4. Free tier EC2 instance type?    
-   5. Public vs Private subnet farkı? 
-
-
-CEVAPLAR:
-1. Provider'ları indirir
-2. Terraform'un state dosyası - oluşturulan kaynaklar
-3. EC2 için firewall kuralları
-4. t2.micro
-5. Public = internet erişimi var, Private = yok
-
-� AWS Console'da VPC İncele:
-• VPC > Your VPCs > Default VPC seç
-• Subnets tab'ına bak
-• Route Tables tab'ına bak
-• Internet Gateways tab'ına bak
-
----
-📝 ÖZET - 2. Hafta Tamamlandı!
----
-□ Terraform workflow'u biliyorum
-□ AWS hesabı ve CLI kurulumu yaptım
-□ Manuel EC2 oluşturup SSH ile bağlandım
-□ VPC/Subnet/Security Group kavramlarını anladım
-□ CIDR bloklarını hesaplayabiliyorum
-
-✅ Başarı Kriteri: VPC mimarisini kağıda çizebildin mi?`,
-                        "resources": [
-                            { "name": "VPC Docs", "url": "https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html" }
-                        ]
-                    }
+✅ Başarı: 2 container birlikte çalıştı mı?`,
+                "resources": [
+                    { "name": "Compose", "url": "https://docs.docker.com/compose/" }
                 ]
             },
             {
-                "week": "3. Hafta: Otomasyon & Final",
-                "tasks": [
-                    {
-                        "id": 9,
-                        "date": "19-20 Şubat",
-                        "title": "Terraform ile AWS",
-                        "desc": "Bölüm 7: Terraform ile AWS Kaynakları.",
-                        "challenge": `---
-� TEORİ - Udemy'den İzle (Bölüm 7)
----
+                "id": 7,
+                "date": "15-16 Şubat ⭐",
+                "title": "Compose & Swarm (Hafta Sonu)",
+                "desc": "Bölüm 6 devam + Bölüm 7 (~2.5 saat)",
+                "challenge": `📺 TEORİ (Bölüm 6-7: Compose ileri + Swarm)
 
-💡 AWS Provider Konfigürasyonu:
+Compose İleri:
+• depends_on: sıralama
+• healthcheck: sağlık kontrolü
+• build: Dockerfile'dan
 
-   provider "aws" {                   
-     region = "eu-west-1"             
-   }                                  
-
-• Credential'lar aws configure'dan okunur
-• Region her provider bloğunda belirtilmeli
-
-💡 Data Source Nedir?
-• VAR OLAN kaynakları okur
-• Yeni kaynak oluşturmaz
-• Örnek: En güncel AMI ID'sini bul
-
-   data "aws_ami" "latest" {          
-     most_recent = true               
-     owners      = ["amazon"]         
-   }                                  
-
-
-💡 Temel AWS Kaynakları:
-• aws_instance = EC2 sunucu
-• aws_s3_bucket = S3 bucket
-• aws_security_group = Firewall
-• aws_vpc = Virtual Private Cloud
-• aws_subnet = Alt ağ
-
-💡 Resource Referansları:
-• Bir kaynak diğerine referans verebilir
-• Syntax: <resource_type>.<name>.<attribute>
-• Örnek: aws_s3_bucket.my_bucket.arn
+Docker Swarm (Tanışma):
+• Cluster yönetimi
+• Service kavramı
+• Scaling
 
 ---
-�️ PRATİK - S3 Bucket Oluştur!
----
 
-ADIM 1: Proje Klasörü
+🛠️ PRATİK
 
-   mkdir terraform-s3                 
-   cd terraform-s3                    
+1. WordPress + MySQL stack:
 
+services:
+  wordpress:
+    image: wordpress
+    ports:
+      - "8080:80"
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_PASSWORD: secret
+    depends_on:
+      - db
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
 
-ADIM 2: main.tf Oluştur
+2. Başlat ve test et:
+   docker compose up -d
+   # localhost:8080 aç
 
-   terraform {                        
-     required_providers {             
-       aws = {                        
-         source  = "hashicorp/aws"    
-         version = "~> 5.0"           
-       }                              
-     }                                
-   }                                  
-                                      
-   provider "aws" {                   
-     region = "eu-west-1"             
-   }                                  
-                                      
-   # S3 Bucket oluştur                
-   resource "aws_s3_bucket" "devops" {
-     bucket = "devops-kamp-ADINIZ-2026"│
-     # ⚠️ Bucket ismi GLOBAL benzersiz!│
-                                      
-     tags = {                         
-       Name        = "DevOps Kamp"    
-       Environment = "Learning"       
-     }                                
-   }                                  
-                                      
-   # Versioning aç                    
-   resource "aws_s3_bucket_versioning" "v" {
-     bucket = aws_s3_bucket.devops.id 
-     versioning_configuration {       
-       status = "Enabled"             
-     }                                
-   }                                  
-                                      
-   output "bucket_arn" {              
-     value = aws_s3_bucket.devops.arn 
-   }                                  
-                                      
-   output "bucket_url" {              
-     value = "https://\${aws_s3_bucket.devops.bucket}.s3.amazonaws.com"
-   }                                  
+3. Docker Review - öğrendiklerini tekrarla!
 
+✅ Başarı: WordPress kurulumu açıldı mı?`,
+                "resources": [
+                    { "name": "Compose Examples", "url": "https://github.com/docker/awesome-compose" }
+                ]
+            },
+            {
+                "id": 8,
+                "date": "17-18 Şubat",
+                "title": "Terraform Giriş & Kurulum",
+                "desc": "Bölüm 1-4 (~2 saat)",
+                "challenge": `📺 TEORİ (Terraform Bölüm 1-4)
 
-ADIM 3: Uygula
+Infrastructure as Code (IaC):
+• Altyapıyı kod olarak yönet
+• Versiyon kontrolü
+• Tekrarlanabilirlik
 
-   terraform init                     
-   terraform plan                     
-   terraform apply                    
-   # "yes" yaz                        
+Terraform Nedir?
+• HashiCorp'un IaC aracı
+• HCL dili (HashiCorp Configuration Language)
+• Provider'lar ile cloud entegrasyonu
 
-
-ADIM 4: AWS Console'da Kontrol Et
-• AWS Console > S3 > Buckets
-• Bucket'ını listede gör!
-
-ADIM 5: TEMİZLİK (ÖNEMLİ!)
-
-   terraform destroy                  
-   # "yes" yaz                        
-
-• S3 free tier'da da ücret kesebilir!
+Temel Kavramlar:
+• Provider = Cloud sağlayıcı (AWS, Azure...)
+• Resource = Oluşturulacak kaynak
+• State = Mevcut durum kaydı
 
 ---
-📝 ÖZET - Bugün Ne Öğrendim?
----
-□ AWS provider konfigürasyonunu
-□ aws_s3_bucket resource'unu
-□ Resource referanslarını (aws_s3_bucket.name.attribute)
-□ Output kullanımını
-□ Gerçek AWS kaynağı oluşturma/silme
 
-✅ Başarı Kriteri: S3 bucket AWS Console'da göründü mü?`,
-                        "resources": [
-                            { "name": "S3 Terraform", "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket" }
-                        ]
-                    },
-                    {
-                        "id": 10,
-                        "date": "21-22 Şubat",
-                        "title": "Terraform ile EC2",
-                        "desc": "Bölüm 7: EC2 Sunucu Otomasyonu.",
-                        "challenge": `---
-� TEORİ - Udemy'den İzle (Bölüm 7 devam)
----
+🛠️ PRATİK
 
-💡 aws_instance Resource:
-• EC2 sunucusu oluşturur
-• AMI ID gerekli (data source ile bulunur)
-• Instance type gerekli (t2.micro free tier)
-• Security group bağlanabilir
+1. Terraform indir: terraform.io
+2. Kur ve kontrol et:
+   terraform --version
 
-💡 Variables (Değişkenler):
+3. AWS CLI kur ve yapılandır:
+   aws configure
+   # Access Key, Secret Key, Region gir
 
-   variable "instance_type" {         
-     description = "EC2 tipi"         
-     type        = string             
-     default     = "t2.micro"         
-   }                                  
+4. İlk main.tf:
+   terraform {
+     required_providers {
+       aws = {
+         source = "hashicorp/aws"
+       }
+     }
+   }
+   provider "aws" {
+     region = "eu-west-1"
+   }
 
-• Kullanım: var.instance_type
-• -var="instance_type=t3.micro" ile override
+5. terraform init
 
-💡 Data Source ile AMI Bulma:
-• AMI ID'leri region'a göre değişir
-• Data source ile en güncel AMI'yi bul
-• Hardcode AMI ID'si kullanma!
+✅ Başarı: terraform init başarılı mı?`,
+                "resources": [
+                    { "name": "Terraform Install", "url": "https://developer.hashicorp.com/terraform/downloads" }
+                ]
+            }
+        ]
+    },
+    {
+        "week": "3. Hafta: Terraform & AWS",
+        "tasks": [
+            {
+                "id": 9,
+                "date": "19-20 Şubat",
+                "title": "Terraform Temelleri",
+                "desc": "Bölüm 5 (~1 saat)",
+                "challenge": `📺 TEORİ (Bölüm 5: Terraform Temelleri - 1 saat)
 
-💡 Security Group Tanımlama:
-• ingress = gelen trafik kuralları
-• egress = giden trafik kuralları
-• 0.0.0.0/0 = tüm IP'lere izin ver
+Terraform Workflow:
+• terraform init = provider indir
+• terraform plan = değişiklikleri gör
+• terraform apply = uygula
+• terraform destroy = sil
 
----
-�️ PRATİK - EC2 Sunucu Oluştur!
----
+State Dosyası:
+• terraform.tfstate
+• Gerçek durumu takip eder
+• Asla elle düzenleme!
 
-ADIM 1: Proje Klasörü
-
-   mkdir terraform-ec2                
-   cd terraform-ec2                   
-
-
-ADIM 2: variables.tf Oluştur
-
-   variable "instance_type" {         
-     default = "t2.micro"             
-   }                                  
-                                      
-   variable "project_name" {          
-     default = "DevOps-Kamp"          
-   }                                  
-
-
-ADIM 3: main.tf Oluştur
-
-   terraform {                        
-     required_providers {             
-       aws = {                        
-         source  = "hashicorp/aws"    
-         version = "~> 5.0"           
-       }                              
-     }                                
-   }                                  
-                                      
-   provider "aws" { region = "eu-west-1" }
-                                      
-   # En güncel Amazon Linux AMI'yi bul
-   data "aws_ami" "amazon_linux" {    
-     most_recent = true               
-     owners      = ["amazon"]         
-     filter {                         
-       name   = "name"                
-       values = ["al2023-ami-*-x86_64"]│
-     }                                
-   }                                  
-                                      
-   # Security Group oluştur           
-   resource "aws_security_group" "web" {│
-     name = "web-server-sg"           
-                                      
-     ingress {                        
-       from_port = 22; to_port = 22   
-       protocol = "tcp"               
-       cidr_blocks = ["0.0.0.0/0"]    
-     }                                
-     ingress {                        
-       from_port = 80; to_port = 80   
-       protocol = "tcp"               
-       cidr_blocks = ["0.0.0.0/0"]    
-     }                                
-     egress {                         
-       from_port = 0; to_port = 0     
-       protocol = "-1"                
-       cidr_blocks = ["0.0.0.0/0"]    
-     }                                
-   }                                  
-                                      
-   # EC2 Instance oluştur             
-   resource "aws_instance" "web" {    
-     ami = data.aws_ami.amazon_linux.id│
-     instance_type = var.instance_type
-     vpc_security_group_ids = [       
-       aws_security_group.web.id      
-     ]                                
-     tags = { Name = "Web-Server" }   
-   }                                  
-                                      
-   output "public_ip" {               
-     value = aws_instance.web.public_ip│
-   }                                  
-
-
-ADIM 4: Uygula ve Test Et
-
-   terraform init                     
-   terraform plan                     
-   terraform apply                    
-   # Output'taki IP'yi not al         
-
-
-ADIM 5: AWS Console'dan Kontrol Et
-• EC2 > Instances > DevOps - Kamp - Web
-
-ADIM 6: TEMİZLİK(ÖNEMLİ!)
-
-   terraform destroy                  
-   # "yes" yaz                        
-
+Variables:
+• variable "isim" {}
+• var.isim ile kullan
 
 ---
-📝 ÖZET - Bugün Ne Öğrendim ?
----
-□ aws_instance resource kullanımı
-□ data source ile AMI bulma
-□ aws_security_group tanımlama
-□ variables.tf ile değişken kullanımı
-□ Resource referansları(security_group.id)
 
-✅ Başarı Kriteri: EC2 public IP output'ta göründü mü?`,
-                        "resources": [
-                            { "name": "EC2 Terraform", "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance" }
-                        ]
-                    },
-                    {
-                        "id": 11,
-                        "date": "23-24 Şubat",
-                        "title": "Terraform İleri Konular",
-                        "desc": "Bölüm 8: Modüller ve İleri Konular.",
-                        "challenge": `---
-📺 TEORİ - Udemy'den İzle (Bölüm 8)
----
+🛠️ PRATİK
 
-💡 Terraform Modülü Nedir?
-• Tekrar kullanılabilir Terraform kodu
-• Kendi "building block"larını oluşturursun
-• Aynı modülü farklı parametrelerle kullanabilirsin
-• DRY (Don't Repeat Yourself) prensibi
+1. variables.tf oluştur:
+   variable "region" {
+     default = "eu-west-1"
+   }
 
-💡 Modül Yapısı:
-terraform-project/
-├── main.tf          # Root module
-├── variables.tf     # Root değişkenler
-├── outputs.tf       # Root çıktılar
-└── modules/
-    └── ec2/         # Child module
-        ├── main.tf
-        ├── variables.tf
-        └── outputs.tf
+2. main.tf güncelle:
+   provider "aws" {
+     region = var.region
+   }
 
-💡 Modül Çağırma:
-module "isim" {
-  source = "./modules/ec2"   # Modül yolu
-  param1 = "deger1"          # Input değişkeni
-  param2 = var.baska_degisken
-}
+3. Planı gör:
+   terraform plan
 
-💡 Modül Output Kullanımı:
-• module.isim.output_adi şeklinde erişilir
-• Örnek: module.web.public_ip
+✅ Başarı: terraform plan çalıştı mı?`,
+                "resources": [
+                    { "name": "Terraform Basics", "url": "https://developer.hashicorp.com/terraform/tutorials/aws-get-started" }
+                ]
+            },
+            {
+                "id": 10,
+                "date": "21 Şubat",
+                "title": "AWS Temelleri",
+                "desc": "Bölüm 6 ilk yarı (~1.5 saat)",
+                "challenge": `📺 TEORİ (Bölüm 6: AWS Temelleri - Part 1)
+
+AWS Temel Servisler:
+• EC2 = Sanal sunucu
+• S3 = Object storage
+• VPC = Virtual network
+• IAM = Yetkilendirme
+
+Free Tier:
+• 12 ay ücretsiz
+• t2.micro EC2
+• 5GB S3
 
 ---
-🛠️ PRATİK - Modül Oluştur!
----
 
-ADIM 1: Klasör Yapısını Oluştur
-terraform-modules/
-├── main.tf
-├── variables.tf
-└── modules/
-    └── ec2-instance/
-        ├── main.tf
-        ├── variables.tf
-        └── outputs.tf
+🛠️ PRATİK
 
-ADIM 2: modules/ec2-instance/variables.tf
-variable "instance_name" {
-  type = string
-}
-variable "instance_type" {
-  default = "t2.micro"
-}
+1. S3 bucket oluştur (main.tf):
 
-ADIM 3: modules/ec2-instance/main.tf
-data "aws_ami" "al" {
-  most_recent = true
-  owners = ["amazon"]
-  filter {
-    name = "name"
-    values = ["al2023-ami-*-x86_64"]
-  }
-}
-resource "aws_instance" "this" {
-  ami = data.aws_ami.al.id
-  instance_type = var.instance_type
-  tags = { Name = var.instance_name }
-}
+   resource "aws_s3_bucket" "mybucket" {
+     bucket = "devops-kamp-ADINIZ-2026"
+   }
 
-ADIM 4: modules/ec2-instance/outputs.tf
-output "public_ip" {
-  value = aws_instance.this.public_ip
-}
+2. Uygula:
+   terraform apply
+   # "yes" yaz
 
-ADIM 5: Root main.tf
-provider "aws" { region = "eu-west-1" }
+3. AWS Console'da kontrol et
 
-module "web" {
-  source = "./modules/ec2-instance"
-  instance_name = "Web-Server"
-}
-module "app" {
-  source = "./modules/ec2-instance"
-  instance_name = "App-Server"
-}
+4. TEMİZLİK:
+   terraform destroy
 
-output "web_ip" { value = module.web.public_ip }
-output "app_ip" { value = module.app.public_ip }
+✅ Başarı: S3 bucket Console'da göründü mü?`,
+                "resources": [
+                    { "name": "AWS S3", "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket" }
+                ]
+            },
+            {
+                "id": 11,
+                "date": "22-23 Şubat ⭐",
+                "title": "Terraform ile AWS (Hafta Sonu)",
+                "desc": "Bölüm 6-7 (~3 saat)",
+                "challenge": `📺 TEORİ (Bölüm 6-7: AWS ile Terraform)
 
-ADIM 6: Çalıştır
-terraform init
-terraform apply
+EC2 Instance:
+• aws_instance resource
+• AMI = makine imajı
+• Instance type = boyut
+
+Security Group:
+• Firewall kuralları
+• ingress = gelen
+• egress = giden
 
 ---
-📝 ÖZET - Bugün Ne Öğrendim?
----
-□ Terraform modül kavramını
-□ source ile modül çağırma
-□ Modül input/output kullanımı
-□ DRY prensibiyle kod tekrarını azaltma
 
-✅ Başarı Kriteri: 2 EC2 tek modülden oluştu mu?`,
-                        "resources": [
-                            { "name": "Terraform Modules", "url": "https://developer.hashicorp.com/terraform/language/modules" }
-                        ]
-                    },
-                    {
-                        "id": 12,
-                        "date": "25 Şubat",
-                        "title": "FİNAL PROJESİ 🎉",
-                        "desc": "Terraform + Docker Entegrasyonu.",
-                        "challenge": `---
-🏆 FİNAL PROJESİ: Full Stack DevOps!
----
+🛠️ PRATİK
 
-🎯 Hedef: Tek komutla AWS'de web sitesi yayınla!
+1. Security Group + EC2 (main.tf):
 
-Terraform ile:
-✓ EC2 sunucu oluştur
-✓ Otomatik Docker kur (UserData)
-✓ Nginx container başlat
-✓ Security Group ayarla
-✓ URL'i output olarak göster
+   resource "aws_security_group" "web" {
+     name = "web-sg"
+     ingress {
+       from_port = 80
+       to_port = 80
+       protocol = "tcp"
+       cidr_blocks = ["0.0.0.0/0"]
+     }
+     egress {
+       from_port = 0
+       to_port = 0
+       protocol = "-1"
+       cidr_blocks = ["0.0.0.0/0"]
+     }
+   }
 
----
-💡 UserData Nedir?
----
-• EC2 başlarken çalışan script
-• Sunucu kurulumu otomatikleşir
-• Bash script olarak yazılır
-• Cloud-init ile çalışır
+   resource "aws_instance" "web" {
+     ami = "ami-0c55b159cbfafe1f0"
+     instance_type = "t2.micro"
+     vpc_security_group_ids = [aws_security_group.web.id]
+     tags = { Name = "DevOps-Server" }
+   }
 
----
-🛠️ PRATİK - Final Projesini Yap!
----
+   output "public_ip" {
+     value = aws_instance.web.public_ip
+   }
 
-ADIM 1: Klasör oluştur
-mkdir final-project && cd final-project
+2. terraform apply
 
-ADIM 2: main.tf oluştur
+3. TEMİZLİK: terraform destroy
 
-provider "aws" { region = "eu-west-1" }
+✅ Başarı: EC2 public IP aldın mı?`,
+                "resources": [
+                    { "name": "AWS EC2", "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance" }
+                ]
+            },
+            {
+                "id": 12,
+                "date": "24-25 Şubat",
+                "title": "Final Proje 🎉",
+                "desc": "Bölüm 8 + Final (~1.5 saat)",
+                "challenge": `🏆 FİNAL PROJESİ
 
-data "aws_ami" "al" {
-  most_recent = true
-  owners = ["amazon"]
-  filter {
-    name = "name"
-    values = ["al2023-ami-*-x86_64"]
-  }
-}
-
-resource "aws_security_group" "web" {
-  name = "final-web-sg"
-  ingress {
-    from_port = 80
-    to_port = 80
-    protocol = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-  ingress {
-    from_port = 22
-    to_port = 22
-    protocol = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-  egress {
-    from_port = 0
-    to_port = 0
-    protocol = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-}
-
-resource "aws_instance" "web" {
-  ami = data.aws_ami.al.id
-  instance_type = "t2.micro"
-  vpc_security_group_ids = [aws_security_group.web.id]
-
-  user_data = <<-EOF
-    #!/bin/bash
-    yum update -y
-    yum install docker -y
-    systemctl start docker
-    systemctl enable docker
-    docker run -d -p 80:80 nginx
-  EOF
-
-  tags = { Name = "Final-DevOps-Server" }
-}
-
-output "website_url" {
-  value = "http://\${aws_instance.web.public_ip}"
-}
-
-ADIM 3: Çalıştır ve Test Et
-terraform init
-terraform plan
-terraform apply
-# 2-3 dakika bekle (Docker kurulumu)
-# Output URL'ini tarayıcıda aç
-# "Welcome to nginx!" görmelisin!
-
-ADIM 4: TEMİZLİK
-terraform destroy
+Hedef: Terraform ile EC2'da Docker web sitesi!
 
 ---
-🎉 TEBRİKLER! Kampı Tamamladın!
+
+🛠️ ADIMLAR
+
+1. main.tf oluştur - EC2 + Docker + Nginx:
+
+   resource "aws_instance" "web" {
+     ami = "ami-0c55b159cbfafe1f0"
+     instance_type = "t2.micro"
+     
+     user_data = <<-EOF
+       #!/bin/bash
+       yum update -y
+       yum install docker -y
+       systemctl start docker
+       docker run -d -p 80:80 nginx
+     EOF
+
+     tags = { Name = "Final-Project" }
+   }
+
+   output "url" {
+     value = "http://\${aws_instance.web.public_ip}"
+   }
+
+2. terraform apply
+
+3. 2-3 dk bekle, URL'i aç
+
+4. "Welcome to nginx!" gör!
+
+5. terraform destroy
+
 ---
+
+🎉 TEBRİKLER!
 
 3 Haftada Öğrendiklerin:
 ✓ Docker container yönetimi
 ✓ Dockerfile ile image oluşturma
-✓ Docker Compose ile multi-container
-✓ AWS Console ve CLI
+✓ Docker Compose
 ✓ Terraform ile Infrastructure as Code
-✓ EC2, S3, VPC, Security Group
-✓ Modüler Terraform kodu
-✓ Full DevOps pipeline
+✓ AWS EC2, S3, Security Group
 
 Sonraki Adımlar:
-• CI/CD (GitHub Actions, GitLab CI)
 • Kubernetes
-• Monitoring (Prometheus, Grafana)
+• CI/CD (GitHub Actions)
 • AWS Sertifikasyonları
 
-✅ Başarı Kriteri: terraform apply ile site açıldı mı?`,
-                        "resources": [
-                            { "name": "User Data", "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html" },
-                            { "name": "DevOps Roadmap", "url": "https://roadmap.sh/devops" }
-                        ]
-                    }
+✅ Başarı: Nginx sayfası açıldı mı?`,
+                "resources": [
+                    { "name": "DevOps Roadmap", "url": "https://roadmap.sh/devops" }
                 ]
             }
-        ];
+        ]
+    }
+];
+
 
         // LocalStorage Keys
         const STORAGE_KEY = 'devops-camp-progress';
