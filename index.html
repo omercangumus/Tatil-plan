@@ -890,7 +890,7 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M13 10V3L4 14h7v7l9-11h-7z" />
                 </svg>
-                4 - 25 Şubat 2026
+                5 Şubat - 4 Mart 2026
             </div>
             <h1>DevOps Ara Tatil Kampı</h1>
             <p>Docker & Terraform ile bulut altyapısını öğren, pratik yap ve uzmanlaş!</p>
@@ -1040,16 +1040,16 @@
         ];
 
         // Course Data - Sürelere Göre Dengelenmiş Görevler
-const courseData = [
-    {
-        "week": "1. Hafta: Docker Temelleri",
-        "tasks": [
+        const courseData = [
             {
-                "id": 1,
-                "date": "5-6 Şubat",
-                "title": "Docker Giriş & Kurulum",
-                "desc": "Bölüm 1-2 (~2 saat)",
-                "challenge": `📺 TEORİ (Bölüm 1: Giriş - 1 saat)
+                "week": "1. Hafta: Docker Başlangıç",
+                "tasks": [
+                    {
+                        "id": 1,
+                        "date": "5-7 Şubat",
+                        "title": "Docker Giriş & Kurulum",
+                        "desc": "Bölüm 1-2 (~2 saat)",
+                        "challenge": `📺 TEORİ (Bölüm 1: Giriş - 1 saat)
 
 Docker Nedir?
 • Uygulamaları container denilen izole kutularda çalıştırır
@@ -1074,16 +1074,16 @@ Temel Kavramlar:
    docker run hello-world
 
 ✅ Başarı: docker --version çalıştı mı?`,
-                "resources": [
-                    { "name": "Docker Install", "url": "https://docs.docker.com/get-started/" }
-                ]
-            },
-            {
-                "id": 2,
-                "date": "7-8 Şubat",
-                "title": "Container 101",
-                "desc": "Bölüm 3 (~2.5 saat)",
-                "challenge": `📺 TEORİ (Bölüm 3: Container 101 - 2.5 saat)
+                        "resources": [
+                            { "name": "Docker Install", "url": "https://docs.docker.com/get-started/" }
+                        ]
+                    },
+                    {
+                        "id": 2,
+                        "date": "8-9 Şubat ⭐",
+                        "title": "Container 101",
+                        "desc": "Bölüm 3 (~2.5 saat)",
+                        "challenge": `📺 TEORİ (Bölüm 3: Container 101 - 2.5 saat)
 
 Container Yaşam Döngüsü:
 • docker run = oluştur + başlat
@@ -1116,16 +1116,16 @@ Volume:
    docker rm web
 
 ✅ Başarı: Container içine bash ile girdin mi?`,
-                "resources": [
-                    { "name": "Docker CLI", "url": "https://docs.docker.com/engine/reference/commandline/cli/" }
-                ]
-            },
-            {
-                "id": 3,
-                "date": "8-9 Şubat ⭐",
-                "title": "Container 102 (Hafta Sonu)",
-                "desc": "Bölüm 4 (~2.5 saat)",
-                "challenge": `📺 TEORİ (Bölüm 4: Container 102 - 2.5 saat)
+                        "resources": [
+                            { "name": "Docker CLI", "url": "https://docs.docker.com/engine/reference/commandline/cli/" }
+                        ]
+                    },
+                    {
+                        "id": 3,
+                        "date": "8-9 Şubat ⭐",
+                        "title": "Container 102 (Hafta Sonu)",
+                        "desc": "Bölüm 4 (~2.5 saat)",
+                        "challenge": `📺 TEORİ (Bölüm 4: Container 102 - 2.5 saat)
 
 Environment Variables:
 • -e KEY=VALUE
@@ -1156,16 +1156,16 @@ Resource Limits:
    docker container prune
 
 ✅ Başarı: MySQL container env ile çalıştı mı?`,
-                "resources": [
-                    { "name": "Container Options", "url": "https://docs.docker.com/engine/reference/run/" }
-                ]
-            },
-            {
-                "id": 4,
-                "date": "10-11 Şubat",
-                "title": "Image & Registry (Part 1)",
-                "desc": "Bölüm 5 ilk yarı (~2.5 saat)",
-                "challenge": `📺 TEORİ (Bölüm 5: Image - İlk Yarı)
+                        "resources": [
+                            { "name": "Container Options", "url": "https://docs.docker.com/engine/reference/run/" }
+                        ]
+                    },
+                    {
+                        "id": 4,
+                        "date": "10-12 Şubat",
+                        "title": "Image & Registry (Part 1)",
+                        "desc": "Bölüm 5 ilk yarı (~2.5 saat)",
+                        "challenge": `📺 TEORİ (Bölüm 5: Image - İlk Yarı)
 
 Dockerfile Temelleri:
 • FROM = base image
@@ -1199,21 +1199,21 @@ Image Katmanları:
    docker run -d -p 8080:80 mysite:v1
 
 ✅ Başarı: localhost:8080'de sayfanı gördün mü?`,
-                "resources": [
-                    { "name": "Dockerfile", "url": "https://docs.docker.com/engine/reference/builder/" }
+                        "resources": [
+                            { "name": "Dockerfile", "url": "https://docs.docker.com/engine/reference/builder/" }
+                        ]
+                    }
                 ]
-            }
-        ]
-    },
-    {
-        "week": "2. Hafta: Docker İleri & Terraform Giriş",
-        "tasks": [
+            },
             {
-                "id": 5,
-                "date": "12-13 Şubat",
-                "title": "Image & Registry (Part 2)",
-                "desc": "Bölüm 5 ikinci yarı (~2.5 saat)",
-                "challenge": `📺 TEORİ (Bölüm 5: Image - İkinci Yarı)
+                "week": "2. Hafta: Docker İleri",
+                "tasks": [
+                    {
+                        "id": 5,
+                        "date": "13-14 Şubat",
+                        "title": "Image & Registry (Part 2)",
+                        "desc": "Bölüm 5 ikinci yarı (~2.5 saat)",
+                        "challenge": `📺 TEORİ (Bölüm 5: Image - İkinci Yarı)
 
 Multi-stage Build:
 • Küçük final image
@@ -1248,16 +1248,16 @@ Tagging:
    docker image prune
 
 ✅ Başarı: Docker Hub'da image'ını gördün mü?`,
-                "resources": [
-                    { "name": "Docker Hub", "url": "https://hub.docker.com/" }
-                ]
-            },
-            {
-                "id": 6,
-                "date": "14 Şubat",
-                "title": "Docker Compose",
-                "desc": "Bölüm 6 ilk yarı (~2 saat)",
-                "challenge": `📺 TEORİ (Bölüm 6: Compose - 2 saat)
+                        "resources": [
+                            { "name": "Docker Hub", "url": "https://hub.docker.com/" }
+                        ]
+                    },
+                    {
+                        "id": 6,
+                        "date": "17-19 Şubat",
+                        "title": "Docker Compose",
+                        "desc": "Bölüm 6 ilk yarı (~2 saat)",
+                        "challenge": `📺 TEORİ (Bölüm 6: Compose - 2 saat)
 
 Docker Compose Nedir?
 • Çoklu container yönetimi
@@ -1296,16 +1296,16 @@ services:
    docker compose down
 
 ✅ Başarı: 2 container birlikte çalıştı mı?`,
-                "resources": [
-                    { "name": "Compose", "url": "https://docs.docker.com/compose/" }
-                ]
-            },
-            {
-                "id": 7,
-                "date": "15-16 Şubat ⭐",
-                "title": "Compose & Swarm (Hafta Sonu)",
-                "desc": "Bölüm 6 devam + Bölüm 7 (~2.5 saat)",
-                "challenge": `📺 TEORİ (Bölüm 6-7: Compose ileri + Swarm)
+                        "resources": [
+                            { "name": "Compose", "url": "https://docs.docker.com/compose/" }
+                        ]
+                    },
+                    {
+                        "id": 7,
+                        "date": "17-19 Şubat",
+                        "title": "Compose & Swarm (Hafta Sonu)",
+                        "desc": "Bölüm 6 devam + Bölüm 7 (~2.5 saat)",
+                        "challenge": `📺 TEORİ (Bölüm 6-7: Compose ileri + Swarm)
 
 Compose İleri:
 • depends_on: sıralama
@@ -1345,16 +1345,16 @@ services:
 3. Docker Review - öğrendiklerini tekrarla!
 
 ✅ Başarı: WordPress kurulumu açıldı mı?`,
-                "resources": [
-                    { "name": "Compose Examples", "url": "https://github.com/docker/awesome-compose" }
-                ]
-            },
-            {
-                "id": 8,
-                "date": "17-18 Şubat",
-                "title": "Terraform Giriş & Kurulum",
-                "desc": "Bölüm 1-4 (~2 saat)",
-                "challenge": `📺 TEORİ (Terraform Bölüm 1-4)
+                        "resources": [
+                            { "name": "Compose Examples", "url": "https://github.com/docker/awesome-compose" }
+                        ]
+                    },
+                    {
+                        "id": 8,
+                        "date": "20-21 Şubat",
+                        "title": "Terraform Giriş & Kurulum",
+                        "desc": "Bölüm 1-4 (~2 saat)",
+                        "challenge": `📺 TEORİ (Terraform Bölüm 1-4)
 
 Infrastructure as Code (IaC):
 • Altyapıyı kod olarak yönet
@@ -1398,21 +1398,21 @@ Temel Kavramlar:
 5. terraform init
 
 ✅ Başarı: terraform init başarılı mı?`,
-                "resources": [
-                    { "name": "Terraform Install", "url": "https://developer.hashicorp.com/terraform/downloads" }
+                        "resources": [
+                            { "name": "Terraform Install", "url": "https://developer.hashicorp.com/terraform/downloads" }
+                        ]
+                    }
                 ]
-            }
-        ]
-    },
-    {
-        "week": "3. Hafta: Terraform & AWS",
-        "tasks": [
+            },
             {
-                "id": 9,
-                "date": "19-20 Şubat",
-                "title": "Terraform Temelleri",
-                "desc": "Bölüm 5 (~1 saat)",
-                "challenge": `📺 TEORİ (Bölüm 5: Terraform Temelleri - 1 saat)
+                "week": "3. Hafta: Terraform Temelleri",
+                "tasks": [
+                    {
+                        "id": 9,
+                        "date": "22-23 Şubat ⭐",
+                        "title": "Terraform Temelleri",
+                        "desc": "Bölüm 5 (~1 saat)",
+                        "challenge": `📺 TEORİ (Bölüm 5: Terraform Temelleri - 1 saat)
 
 Terraform Workflow:
 • terraform init = provider indir
@@ -1447,16 +1447,16 @@ Variables:
    terraform plan
 
 ✅ Başarı: terraform plan çalıştı mı?`,
-                "resources": [
-                    { "name": "Terraform Basics", "url": "https://developer.hashicorp.com/terraform/tutorials/aws-get-started" }
-                ]
-            },
-            {
-                "id": 10,
-                "date": "21 Şubat",
-                "title": "AWS Temelleri",
-                "desc": "Bölüm 6 ilk yarı (~1.5 saat)",
-                "challenge": `📺 TEORİ (Bölüm 6: AWS Temelleri - Part 1)
+                        "resources": [
+                            { "name": "Terraform Basics", "url": "https://developer.hashicorp.com/terraform/tutorials/aws-get-started" }
+                        ]
+                    },
+                    {
+                        "id": 10,
+                        "date": "24-26 Şubat",
+                        "title": "AWS Temelleri",
+                        "desc": "Bölüm 6 ilk yarı (~1.5 saat)",
+                        "challenge": `📺 TEORİ (Bölüm 6: AWS Temelleri - Part 1)
 
 AWS Temel Servisler:
 • EC2 = Sanal sunucu
@@ -1489,16 +1489,21 @@ Free Tier:
    terraform destroy
 
 ✅ Başarı: S3 bucket Console'da göründü mü?`,
-                "resources": [
-                    { "name": "AWS S3", "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket" }
+                        "resources": [
+                            { "name": "AWS S3", "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket" }
+                        ]
+                    }
                 ]
             },
             {
-                "id": 11,
-                "date": "22-23 Şubat ⭐",
-                "title": "Terraform ile AWS (Hafta Sonu)",
-                "desc": "Bölüm 6-7 (~3 saat)",
-                "challenge": `📺 TEORİ (Bölüm 6-7: AWS ile Terraform)
+                "week": "4. Hafta: AWS & Final",
+                "tasks": [
+                    {
+                        "id": 11,
+                        "date": "1-2 Mart ⭐",
+                        "title": "Terraform ile AWS (Hafta Sonu)",
+                        "desc": "Bölüm 6-7 (~3 saat)",
+                        "challenge": `📺 TEORİ (Bölüm 6-7: AWS ile Terraform)
 
 EC2 Instance:
 • aws_instance resource
@@ -1548,16 +1553,16 @@ Security Group:
 3. TEMİZLİK: terraform destroy
 
 ✅ Başarı: EC2 public IP aldın mı?`,
-                "resources": [
-                    { "name": "AWS EC2", "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance" }
-                ]
-            },
-            {
-                "id": 12,
-                "date": "24-25 Şubat",
-                "title": "Final Proje 🎉",
-                "desc": "Bölüm 8 + Final (~1.5 saat)",
-                "challenge": `🏆 FİNAL PROJESİ
+                        "resources": [
+                            { "name": "AWS EC2", "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance" }
+                        ]
+                    },
+                    {
+                        "id": 12,
+                        "date": "2-4 Mart",
+                        "title": "Final Proje 🎉",
+                        "desc": "Bölüm 8 + Final (~1.5 saat)",
+                        "challenge": `🏆 FİNAL PROJESİ
 
 Hedef: Terraform ile EC2'da Docker web sitesi!
 
@@ -1598,7 +1603,7 @@ Hedef: Terraform ile EC2'da Docker web sitesi!
 
 🎉 TEBRİKLER!
 
-3 Haftada Öğrendiklerin:
+4 Haftada Öğrendiklerin:
 ✓ Docker container yönetimi
 ✓ Dockerfile ile image oluşturma
 ✓ Docker Compose
@@ -1611,13 +1616,13 @@ Sonraki Adımlar:
 • AWS Sertifikasyonları
 
 ✅ Başarı: Nginx sayfası açıldı mı?`,
-                "resources": [
-                    { "name": "DevOps Roadmap", "url": "https://roadmap.sh/devops" }
+                        "resources": [
+                            { "name": "DevOps Roadmap", "url": "https://roadmap.sh/devops" }
+                        ]
+                    }
                 ]
             }
-        ]
-    }
-];
+        ];
 
 
         // LocalStorage Keys
