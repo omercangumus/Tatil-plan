@@ -1924,12 +1924,12 @@ Sonraki Adımlar:
             updateStreak();
             showRandomTip();
 
+            // Style for tip transition
+            document.getElementById('tipText').style.transition = 'opacity 0.2s ease';
+
             // Update countdown every minute
             setInterval(updateCountdown, 60000);
         });
-
-        // Style for tip transition
-        document.getElementById('tipText').style.transition = 'opacity 0.2s ease';
     </script>
 </body>
 
