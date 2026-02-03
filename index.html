@@ -1668,20 +1668,28 @@ Sonraki Adımlar:
 
         // Countdown
         function updateCountdown() {
-            const endDate = new Date('2026-03-04T23:59:59');
+            // Hedef: 4 Mart 2026, 23:59:59
+            const endDate = new Date(2026, 2, 4, 23, 59, 59); // Ay 0-indexed, yani 2 = Mart
             const now = new Date();
-            const diff = endDate - now;
+            const diff = endDate.getTime() - now.getTime();
 
-            if (diff > 0) {
+            const daysEl = document.getElementById('daysLeft');
+            const hoursEl = document.getElementById('hoursLeft');
+            const minutesEl = document.getElementById('minutesLeft');
+
+            if (diff > 0 && daysEl && hoursEl && minutesEl) {
                 const days = Math.floor(diff / (1000 * 60 * 60 * 24));
                 const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                 const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
 
-                document.getElementById('daysLeft').textContent = days;
-                document.getElementById('hoursLeft').textContent = hours;
-                document.getElementById('minutesLeft').textContent = minutes;
-            } else {
-                document.getElementById('countdown').innerHTML = '<div class="countdown-item"><div class="countdown-value">🏁</div><div class="countdown-label">Kamp Bitti!</div></div>';
+                daysEl.textContent = days;
+                hoursEl.textContent = hours;
+                minutesEl.textContent = minutes;
+            } else if (diff <= 0) {
+                const countdown = document.getElementById('countdown');
+                if (countdown) {
+                    countdown.innerHTML = '<div class="countdown-item"><div class="countdown-value">🏁</div><div class="countdown-label">Kamp Bitti!</div></div>';
+                }
             }
         }
 
