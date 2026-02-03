@@ -1668,7 +1668,7 @@ Sonraki Adımlar:
 
         // Countdown
         function updateCountdown() {
-            const endDate = new Date('2026-02-25T23:59:59');
+            const endDate = new Date('2026-03-04T23:59:59');
             const now = new Date();
             const diff = endDate - now;
 
@@ -1745,7 +1745,10 @@ Sonraki Adımlar:
 
         // Format challenge text with code highlighting
         function formatChallenge(text) {
-            return text.replace(/'([^']+)'/g, '<code>$1</code>');
+            // First escape HTML tags so they display as text
+            let escaped = text.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+            // Then apply code highlighting for quoted text
+            return escaped.replace(/'([^']+)'/g, '<code>$1</code>');
         }
 
         // Toggle task completion
@@ -1931,5 +1934,3 @@ Sonraki Adımlar:
 </body>
 
 </html>
-
-
